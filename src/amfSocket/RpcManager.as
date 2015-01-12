@@ -129,6 +129,10 @@ package amfSocket
       _socket.sendObject(object);
     }
 
+    public function reload(busHost:String, port:int):void {
+      reconnect(busHost, port);
+    }
+
     //
     // Protected methods.
     //
@@ -202,8 +206,12 @@ package amfSocket
       }
     }
 
-    private function reconnect():void {
+    private function reconnect(busHost:Object=null, port:Object=null):void {
       __disconnect();
+
+      if(busHost) _host = busHost as String;
+      if(port) _port = port as int;
+
       __connect();
     }
 
